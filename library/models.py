@@ -12,8 +12,21 @@ class Book(models.Model):
     genre = models.CharField(max_length=50)
     featured = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f"{self.title} by {self.author}"
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['title', 'author'], name='unique_book_author')
+        ]
 class Status(models.Model):
     read_status = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = "statuses"
+
+    def __str__(self):
+        return self.read_status
 
 class Notes(models.Model):
     pass
