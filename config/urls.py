@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from library import views
 from library.models import Book
-from library.serializers import BookSerializer
+from library.serializers import BookSerializer, FeaturedSerializer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('books/', views.BookListView.as_view(queryset=Book.objects.all(), serializer_class=BookSerializer), name='book-list')
+    path('books/', views.BookListView.as_view(queryset=Book.objects.all(), serializer_class=BookSerializer), name='book-list'),
+    path('featured/', views.FeaturedListView.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featured-list'),
 ]

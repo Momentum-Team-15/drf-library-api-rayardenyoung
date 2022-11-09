@@ -8,7 +8,7 @@ class User(AbstractUser):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
-    pub_date = models.DateField(blank=True, null=True)
+    published_date = models.DateField(blank=True, null=True)
     genre = models.CharField(max_length=50)
     featured = models.BooleanField(default=False)
 
