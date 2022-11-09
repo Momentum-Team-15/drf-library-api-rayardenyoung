@@ -1,8 +1,8 @@
 # from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import Book
-from .serializers import BookSerializer, FeaturedSerializer
+from .models import Book, Note
+from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer
 
 
 # Create your views here.
@@ -26,4 +26,13 @@ class FeaturedListView(generics.ListCreateAPIView):
     def list(self, request):
         queryset = self.get_queryset()
         serializer = FeaturedSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class NoteListView(generics.ListCreateAPIView):
+    note_queryset = Note.objects.all()
+    serializer_class = NoteSerializer
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        serializer = NoteSerializer(queryset, many=True)
         return Response(serializer.data)
