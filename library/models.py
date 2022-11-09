@@ -10,9 +10,10 @@ class Book(models.Model):
     author = models.CharField(max_length=100)
     pub_date = models.DateField(blank=True, null=True)
     genre = models.CharField(max_length=50)
-    featured = models.BooleanField()
-    # status = 
-    # user = 
-    # notes = 
+    featured = models.BooleanField(default=False)
 
+class Status(models.Model):
+    read_status = models.CharField(max_length=50)
 
+class Notes(models.Model):
+    pass
