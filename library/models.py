@@ -11,6 +11,7 @@ class Book(models.Model):
     published_date = models.DateField(blank=True, null=True)
     genre = models.CharField(max_length=50)
     featured = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="books", null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} by {self.author}"
@@ -21,6 +22,7 @@ class Book(models.Model):
         ]
 class Status(models.Model):
     read_status = models.CharField(max_length=50)
+    book_status = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "statuses"
@@ -29,4 +31,6 @@ class Status(models.Model):
         return self.read_status
 
 class Notes(models.Model):
-    pass
+    entry = models.TextField(max_length=500, null=True, blank=True)
+    note_date = models.DateField(blank=True, null=True)
+    book_note = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="notes", null=True, blank=True)
