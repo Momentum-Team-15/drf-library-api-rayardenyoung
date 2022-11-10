@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Book, Note
-from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer
+from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, BookDetailSerializer
 
 
 # Create your views here.
@@ -44,6 +44,9 @@ class BookViewSet(ModelViewSet):
 #         headers = self.get_success_headers(serializer.data)
 #         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookDetailSerializer
 
 class FeaturedView(generics.ListCreateAPIView):
     queryset = Book.objects.filter(featured=True)
