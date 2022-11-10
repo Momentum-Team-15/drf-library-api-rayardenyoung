@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('books/', views.BookView.as_view(), name='book-list'),
+    path('bookviewset/', views.BookViewSet.as_view({'get': 'list'}), name='book-list'),
     path('featured/', views.FeaturedView.as_view(), name='featured-list'),
     path('notes/', views.NoteView.as_view(), name='note-list'),
-    # path('create/', views.BookViewSet.as_view({'get': 'list'}), name='book-create')
+    path('books/add/', views.BookViewSet.as_view({'post': 'create'}), name='book-add')
 ]

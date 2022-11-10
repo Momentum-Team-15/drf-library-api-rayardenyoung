@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Book, Note
 from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer
@@ -8,6 +9,7 @@ from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer
 
 # Create your views here.
 
+# trying out ListCreateAPIView for books >>>>
 class BookView(generics.ListCreateAPIView):
     #overriding defaults, I think? setting some class attributes:
     queryset = Book.objects.all()
@@ -18,6 +20,29 @@ class BookView(generics.ListCreateAPIView):
 
     # def perform_create(self, serializer):
     #     serializer.save()
+
+
+#trying out Model View Set for books >>>
+class BookViewSet(ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    # http_method_names = ["get","post"]
+    permission_classes = [AllowAny]
+
+    # def create(self, request, *args, **kwargs):
+    #     try:
+    #         return super().create(request, *args, **kwargs)
+    #     except IntegrityError:
+    #         error_data = {
+    #             "error": "Unique constraint violation: there is already a book with this title by this author."
+    #         }
+    #         return Response(error_data, status=status.HTTP_400_BAD_REQUEST)
+
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exceptions=True)
+#         self.perform_create(serializer)
+#         headers = self.get_success_headers(serializer.data)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 
 class FeaturedView(generics.ListCreateAPIView):
@@ -34,13 +59,3 @@ class NoteView(generics.ListCreateAPIView):
     # def note_list(self, request):
     #     return self.get_queryset()
 
-# class BookViewSet(ModelViewSet):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
-
-#     def create(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exceptions=True)
-#         self.perform_create(serializer)
-#         headers = self.get_success_headers(serializer.data)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
