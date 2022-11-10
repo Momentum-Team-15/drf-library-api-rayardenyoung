@@ -25,4 +25,5 @@ urlpatterns = [
     path('books/', views.BookListView.as_view(queryset=Book.objects.all(), serializer_class=BookSerializer), name='book-list'),
     path('featured/', views.FeaturedListView.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featured-list'),
     path('notes/', views.NoteListView.as_view(queryset=Note.objects.all(), serializer_class=NoteSerializer), name='note-list'),
+    path('create/', views.BookViewSet.as_view(queryset=Book.objects.create(), serializer_class=BookSerializer), name='book-create')
 ]

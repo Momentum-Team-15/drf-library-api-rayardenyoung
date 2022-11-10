@@ -16,10 +16,10 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title} by {self.author}"
 
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(fields=['title', 'author'], name='unique_book_author')
-        ]
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(fields=['title', 'author'], name='unique_book_author')
+    #     ]
 class Status(models.Model):
     read_status = models.CharField(max_length=50)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
