@@ -13,30 +13,26 @@ class BookView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    def book_list(self, request):
-        return self.get_queryset()
+    # def book_list(self, request):
+    #     return self.get_queryset()
 
-    def perform_create(self, serializer):
-        serializer.save()
+    # def perform_create(self, serializer):
+    #     serializer.save()
 
 
 class FeaturedView(generics.ListCreateAPIView):
-    featured_queryset = Book.objects.filter(featured=True)
+    queryset = Book.objects.filter(featured=True)
     serializer_class = FeaturedSerializer
     
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = FeaturedSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def featured_list(self, request):
+    #     return self.filter_queryset()
 
 class NoteView(generics.ListCreateAPIView):
-    note_queryset = Note.objects.all()
+    queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = NoteSerializer(queryset, many=True)
-        return Response(serializer.data)
+    # def note_list(self, request):
+    #     return self.get_queryset()
 
 # class BookViewSet(ModelViewSet):
 #     queryset = Book.objects.all()

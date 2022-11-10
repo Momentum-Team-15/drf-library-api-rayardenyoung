@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('books/', views.BookView.as_view(), name='book-list'),
-    path('featured/', views.FeaturedView.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featured-list'),
-    path('notes/', views.NoteView.as_view(queryset=Note.objects.all(), serializer_class=NoteSerializer), name='note-list'),
+    path('featured/', views.FeaturedView.as_view(), name='featured-list'),
+    path('notes/', views.NoteView.as_view(), name='note-list'),
     # path('create/', views.BookViewSet.as_view({'get': 'list'}), name='book-create')
 ]
