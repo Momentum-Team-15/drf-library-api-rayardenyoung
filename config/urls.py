@@ -22,8 +22,8 @@ from library.serializers import BookSerializer, FeaturedSerializer, NoteSerializ
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('books/', views.BookListView.as_view(queryset=Book.objects.all(), serializer_class=BookSerializer), name='book-list'),
-    path('featured/', views.FeaturedListView.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featured-list'),
-    path('notes/', views.NoteListView.as_view(queryset=Note.objects.all(), serializer_class=NoteSerializer), name='note-list'),
-    path('create/', views.BookViewSet.as_view({'get': 'list'}), name='book-create')
+    path('books/', views.BookView.as_view(), name='book-list'),
+    path('featured/', views.FeaturedView.as_view(queryset=Book.objects.filter(featured=True), serializer_class=FeaturedSerializer), name='featured-list'),
+    path('notes/', views.NoteView.as_view(queryset=Note.objects.all(), serializer_class=NoteSerializer), name='note-list'),
+    # path('create/', views.BookViewSet.as_view({'get': 'list'}), name='book-create')
 ]

@@ -8,19 +8,19 @@ from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer
 
 # Create your views here.
 
-class BookListView(generics.ListCreateAPIView):
+class BookView(generics.ListCreateAPIView):
     #overriding defaults, I think? setting some class attributes:
-    books_queryset = Book.objects.all()
+    queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-    def list(self, request):
-        # because of generic views? have to use `get_queryset()` instead of `self.queryset`
-        queryset = self.get_queryset()
-        serializer = BookSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def book_list(self, request):
+        return self.get_queryset()
+
+    def perform_create(self, serializer):
+        serializer.save()
 
 
-class FeaturedListView(generics.ListCreateAPIView):
+class FeaturedView(generics.ListCreateAPIView):
     featured_queryset = Book.objects.filter(featured=True)
     serializer_class = FeaturedSerializer
     
@@ -29,7 +29,7 @@ class FeaturedListView(generics.ListCreateAPIView):
         serializer = FeaturedSerializer(queryset, many=True)
         return Response(serializer.data)
 
-class NoteListView(generics.ListCreateAPIView):
+class NoteView(generics.ListCreateAPIView):
     note_queryset = Note.objects.all()
     serializer_class = NoteSerializer
 
@@ -38,13 +38,13 @@ class NoteListView(generics.ListCreateAPIView):
         serializer = NoteSerializer(queryset, many=True)
         return Response(serializer.data)
 
-class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+# class BookViewSet(ModelViewSet):
+#     queryset = Book.objects.all()
+#     serializer_class = BookSerializer
 
-    def create_book(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exceptions=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+#     def create(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exceptions=True)
+#         self.perform_create(serializer)
+#         headers = self.get_success_headers(serializer.data)
+#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
