@@ -39,7 +39,7 @@ class NoteListView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 class BookViewSet(ModelViewSet):
-    queryset = Book.objects.create()
+    queryset = Book.objects.all()
     serializer_class = BookSerializer
 
     def create_book(self, request, *args, **kwargs):
