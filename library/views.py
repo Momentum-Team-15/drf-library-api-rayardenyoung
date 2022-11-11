@@ -10,6 +10,7 @@ from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, Boo
 # Create your views here.
 
 # trying out ListCreateAPIView for books >>>>
+#this is now superfluous, but keeping it to check out in Insomnia:
 class BookView(generics.ListCreateAPIView):
     #overriding defaults, I think? setting some class attributes:
     queryset = Book.objects.all()
@@ -44,10 +45,13 @@ class BookViewSet(ModelViewSet):
 #         headers = self.get_success_headers(serializer.data)
 #         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
+#using this view because it's for retrieving, updating or deleting a ~single instance~ of a model
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookDetailSerializer
 
+#ohhh okay, so this ListCreateAPITView is explicitly for listing a queryset or creating a model instance.
+# Used for read-write endpoints to represent a collection of model instances.
 class FeaturedView(generics.ListCreateAPIView):
     queryset = Book.objects.filter(featured=True)
     serializer_class = FeaturedSerializer
