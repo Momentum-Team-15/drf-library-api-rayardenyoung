@@ -23,7 +23,8 @@ class NoteSerializer(serializers.ModelSerializer):
 class BookDetailSerializer(serializers.ModelSerializer):
     #accessing foreign keys.
     statuses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-    notes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    #using stringrelatedfield so notes will show up as string instead of pk
+    notes = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Book

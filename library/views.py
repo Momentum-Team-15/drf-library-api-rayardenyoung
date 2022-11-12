@@ -27,7 +27,6 @@ class BookView(generics.ListCreateAPIView):
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    # http_method_names = ["get","post"]
     permission_classes = [AllowAny]
 
     # def create(self, request, *args, **kwargs):
