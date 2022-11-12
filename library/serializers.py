@@ -21,7 +21,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
-    #accessing foreign keys
+    #accessing foreign keys.
     statuses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     notes = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
