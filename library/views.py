@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -12,22 +12,26 @@ from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, Boo
 # trying out ListCreateAPIView for books >>>>
 #this is now superfluous, but keeping it to check out in Insomnia:
 class BookView(generics.ListCreateAPIView):
-    #overriding defaults, I think? setting some class attributes:
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-    # def book_list(self, request):
-    #     return self.get_queryset()
+    def get_queryset(self):
+        #this is to GET a list of books by user
+        #by overriding the get_querset method built in to ListCreateAPIView, I can filter habits by the logged-in user
+        return self.request.user.books.all()
 
-    # def perform_create(self, serializer):
-    #     serializer.save()
-
+    def perform_create(self, serializer):
+        #this is to POST a new book
+        #by overriding this perform_create method built in to ListCreateAPIView, I can associate the user who is creating this habit
+        serializer.save(user=self.request.user)
+  
 
 #trying out Model View Set for books >>>
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
 
     # def create(self, request, *args, **kwargs):
     #     try:
@@ -37,12 +41,6 @@ class BookViewSet(ModelViewSet):
     #             "error": "Unique constraint violation: there is already a book with this title by this author."
     #         }
     #         return Response(error_data, status=status.HTTP_400_BAD_REQUEST)
-
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exceptions=True)
-#         self.perform_create(serializer)
-#         headers = self.get_success_headers(serializer.data)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 #using this view because it's for retrieving, updating or deleting a ~single instance~ of a model
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
