@@ -22,17 +22,20 @@ class Book(models.Model):
         ]
 
 class Status(models.Model):
+    UNTRACKED = 'n/a'
     WANTTOREAD = 'want-to-read'
     READING = 'reading'
     READ = 'read'
-    STATUS_OPTIONS = [
+    STATUS_CHOICES = [
+        (UNTRACKED, 'n/a'),
         (WANTTOREAD, 'want-to-read'),
         (READING, 'reading'),
         (READ, 'read'),
     ]
-    read_status = models.CharField(max_length=50)
+    read_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=UNTRACKED)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
+    
     class Meta:
         verbose_name_plural = "statuses"
 
