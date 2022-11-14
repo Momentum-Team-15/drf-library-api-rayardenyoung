@@ -75,6 +75,27 @@ Response -
 
 ]
 ```
+# Book Detail Page:
+Request -
+
+Requires authentication.
+<mark>GET books/detail/3</mark>
+
+Response - 
+
+```json
+{
+	"title": "Redemptor",
+	"author": "Jordan Ifueko",
+	"published_date": "2021-08-17",
+	"genre": "YA fantasy",
+	"featured": true,
+	"notes": [
+		"bought redemptor",
+		"on page 1~"
+	]
+}
+```
 
 # Featured List:
 Request -
