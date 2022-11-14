@@ -168,9 +168,10 @@ Response -
 		"featured": false
 	}
 ```
-# figure out error >>
+
 # Status List:
 Request -
+Requires authentication.
 
 <mark>GET status/</mark>
 
@@ -178,12 +179,62 @@ Response -
 
 ```json
 [
-[
 	{
-		"book": "null",
-		"read_status": "n/a",
+		"book": null,
+		"read_status": "NA",
 		"user": null
+	},
+	{
+		"book": null,
+		"read_status": "NA",
+		"user": null
+	},
+	{
+		"book": 3,
+		"read_status": "RDG",
+		"user": 1
 	}
 ]
+```
+# Status Detail:
+Request -
+Requires authentication.
+
+<mark>GET status/3/</mark>
+
+Response - 
+
+```json
+[
+	{
+	"book": 3,
+	"read_status": "NA",
+	"user": 1
+}
 ]
+```
+
+# Edit a status:
+Request -
+Requires authentication. 
+***still only functioning with pk input***
+
+<mark>PATCH status/3</mark>
+
+```json
+[
+{
+    "read_status": "RDG",
+}
+]
+```
+
+Response - 
+
+```json
+{
+	"book": 3,
+	"read_status": "RDG",
+	"user": 1
+}
 ```
