@@ -2,8 +2,8 @@
 from rest_framework import generics, permissions
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from .models import Book, Note
-from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, BookDetailSerializer
+from .models import Book, Note, Status
+from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, BookDetailSerializer, StatusSerializer
 
 
 # Create your views here.
@@ -71,4 +71,15 @@ class NoteView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class StatusView(generics.ListCreateAPIView):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
+
+    # def get_queryset(self):
+    #     queryset = Status.objects.filter(user=self.request.user)
+    #     return queryset
 
