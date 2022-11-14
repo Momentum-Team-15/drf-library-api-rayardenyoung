@@ -41,7 +41,7 @@ You'll need to use Insomnia (or some other tool for making requests) to test you
 
 # ENDPOINTS 
 
-# Book List:
+# 1. Book List:
 Request -
 
 Requires authentication. 
@@ -75,29 +75,8 @@ Response -
 
 ]
 ```
-# Book Detail Page:
-Request -
 
-Requires authentication.
-<mark>GET books/detail/3</mark>
-
-Response - 
-
-```json
-{
-	"title": "Redemptor",
-	"author": "Jordan Ifueko",
-	"published_date": "2021-08-17",
-	"genre": "YA fantasy",
-	"featured": true,
-	"notes": [
-		"bought redemptor",
-		"on page 1~"
-	]
-}
-```
-
-# Featured List:
+# 2. Featured List:
 Request -
 
 Requires authentication. 
@@ -117,32 +96,7 @@ Response -
 
 ]
 ```
-
-# Note List:
-Request -
-
-<mark>GET notes/</mark>
-
-Response - 
-
-```json
-[
-	{
-		"entry_name": "on page 1~",
-		"book": "Redemptor",
-		"date": "2022-11-09",
-		"entry": "have started reading the first chapter!"
-	},
-	{
-		"entry_name": "bought redemptor",
-		"book": "Redemptor",
-		"date": "2022-11-08",
-		"entry": "today I bought redemptor at Rofhiwa - can't wait to start reading it!"
-	}
-]
-```
-
-# Add a book:
+# 3. Add a book:
 Request -
 Requires authentication. <mark>title</mark>, <mark>author</mark>, and <mark>genre</mark> are required fields.
 
@@ -169,6 +123,93 @@ Response -
 	}
 ```
 
+# 4. Book Detail Page:
+Request -
+
+Requires authentication.
+<mark>GET books/detail/3</mark>
+
+Response - 
+
+```json
+{
+	"title": "Redemptor",
+	"author": "Jordan Ifueko",
+	"published_date": "2021-08-17",
+	"genre": "YA fantasy",
+	"featured": true,
+	"notes": [
+		"bought redemptor",
+		"on page 1~"
+	]
+}
+```
+
+# 5. Search books by author/title
+# 6. List of tracked books w/status
+# 7. Mark book with status
+
+# 8. Edit a status:
+Request -
+Requires authentication. 
+***still only functioning with pk input***
+
+<mark>PATCH status/3</mark>
+
+```json
+[
+{
+    "read_status": "RDG",
+}
+]
+```
+
+Response - 
+
+```json
+{
+	"book": 3,
+	"read_status": "RDG",
+	"user": 1
+}
+```
+# 9. Book List by Status
+# 10. Private Note List
+
+# 11. Public Note List:
+Request -
+
+<mark>GET notes/</mark>
+
+Response - 
+
+```json
+[
+	{
+		"entry_name": "on page 1~",
+		"book": "Redemptor",
+		"date": "2022-11-09",
+		"entry": "have started reading the first chapter!"
+	},
+	{
+		"entry_name": "bought redemptor",
+		"book": "Redemptor",
+		"date": "2022-11-08",
+		"entry": "today I bought redemptor at Rofhiwa - can't wait to start reading it!"
+	}
+]
+```
+# 12. Create Note 
+# 13. Edit Note
+# 14. Update a Book
+# 15. Delete a Book
+
+
+
+
+
+
+_______________
 # Status List:
 Request -
 Requires authentication.
@@ -214,27 +255,3 @@ Response -
 ]
 ```
 
-# Edit a status:
-Request -
-Requires authentication. 
-***still only functioning with pk input***
-
-<mark>PATCH status/3</mark>
-
-```json
-[
-{
-    "read_status": "RDG",
-}
-]
-```
-
-Response - 
-
-```json
-{
-	"book": 3,
-	"read_status": "RDG",
-	"user": 1
-}
-```

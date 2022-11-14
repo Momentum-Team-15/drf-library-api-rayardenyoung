@@ -48,5 +48,6 @@ class Note(models.Model):
     date = models.DateField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="notes", null=True, blank=True)
 
+
     def __str__(self):
         return self.entry_name
