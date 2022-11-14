@@ -31,7 +31,7 @@ class BookView(generics.ListCreateAPIView):
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    # permission_classes = [AllowAny]
+    
 
     # def create(self, request, *args, **kwargs):
     #     try:
@@ -46,20 +46,31 @@ class BookViewSet(ModelViewSet):
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookDetailSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 #ohhh okay, so this ListCreateAPITView is explicitly for listing a queryset or creating a model instance.
 # Used for read-write endpoints to represent a collection of model instances.
 class FeaturedView(generics.ListCreateAPIView):
     queryset = Book.objects.filter(featured=True)
     serializer_class = FeaturedSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return self.request.user.books.filter(featured=True)
+
+    #trying to add book that already exists to featured, but not working
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
     
-    # def featured_list(self, request):
-    #     return self.filter_queryset()
 
 class NoteView(generics.ListCreateAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-    # def note_list(self, request):
-    #     return self.get_queryset()
+    def get_queryset(self):
+        return self.request.user.notes.all()
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 

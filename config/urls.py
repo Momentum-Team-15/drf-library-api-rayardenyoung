@@ -25,7 +25,9 @@ urlpatterns = [
     path('books/', views.BookView.as_view(), name='book-list'),
     path('bookviewset/', views.BookViewSet.as_view({'get': 'list'}), name='book-list'),
     path('featured/', views.FeaturedView.as_view(), name='featured-list'),
+    path('featured/edit/<int:pk>/', views.FeaturedView.as_view(), name='featured-edit'),
     path('notes/', views.NoteView.as_view(), name='note-list'),
+    path('notes/add/', views.NoteView.as_view(), name='note-add'),
     path('books/add/', views.BookViewSet.as_view({'post': 'create'}), name='book-add'),
     path('books/detail/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
 ]
