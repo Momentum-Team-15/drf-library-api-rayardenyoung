@@ -19,10 +19,10 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ['entry_name', 'book', 'date', 'entry']
 
-    def create(self, validated_data):
-        # return models.Notes.objects.create(**validated_data)
-        # # or 
-        return super(BookSerializer, self).create(validated_data)
+    # def create(self, validated_data):
+    #     # return models.Notes.objects.create(**validated_data)
+    #     # # or 
+    #     return super(BookSerializer, self).create(validated_data)
 
 
 class BookDetailSerializer(serializers.ModelSerializer):

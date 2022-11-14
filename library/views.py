@@ -1,7 +1,6 @@
 # from django.shortcuts import render
 from rest_framework import generics, permissions
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Book, Note
 from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, BookDetailSerializer
@@ -25,7 +24,6 @@ class BookView(generics.ListCreateAPIView):
         #this is to POST a new book
         #by overriding this perform_create method built in to ListCreateAPIView, I can associate the user who is creating this habit
         serializer.save(user=self.request.user)
-  
 
 #trying out Model View Set for books >>>
 class BookViewSet(ModelViewSet):

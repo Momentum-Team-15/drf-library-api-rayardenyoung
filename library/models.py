@@ -20,11 +20,19 @@ class Book(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['title', 'author'], name='unique_book_author')
         ]
-        
+
 class Status(models.Model):
+    WANTTOREAD = 'want-to-read'
+    READING = 'reading'
+    READ = 'read'
+    STATUS_OPTIONS = [
+        (WANTTOREAD, 'want-to-read'),
+        (READING, 'reading'),
+        (READ, 'read'),
+    ]
     read_status = models.CharField(max_length=50)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
     class Meta:
         verbose_name_plural = "statuses"
 
