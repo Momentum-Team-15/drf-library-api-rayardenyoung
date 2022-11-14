@@ -36,3 +36,222 @@ Admin users can:
 - delete a book (this should not delete notes about a book)
 
 You'll need to use Insomnia (or some other tool for making requests) to test your API as you are building it.
+
+
+
+# ENDPOINTS 
+
+# 1. Book List:
+Request -
+
+Requires authentication. 
+<mark>GET books/</mark>
+
+Response - 
+
+```json
+[
+	{
+		"title": "The Ways of the Househusband vol. 1",
+		"author": "Kousuke Oono",
+		"published_date": "2019-09-17",
+		"genre": "manga",
+		"featured": false
+	},
+	{
+		"title": "Sulfur vol. 1",
+		"author": "H. Albanese",
+		"published_date": null,
+		"genre": "graphic novel",
+		"featured": false
+	},
+    {
+		"title": "Redemptor",
+		"author": "Jordan Ifueko",
+		"published_date": "2021-08-17",
+		"genre": "YA fantasy",
+		"featured": true
+	}
+
+]
+```
+
+# 2. Featured List:
+Request -
+
+Requires authentication. 
+<mark>GET featured/</mark>
+
+Response - 
+
+```json
+[
+	 {
+		"title": "Redemptor",
+		"author": "Jordan Ifueko",
+		"published_date": "2021-08-17",
+		"genre": "YA fantasy",
+		"featured": true
+	}
+
+]
+```
+# 3. Add a book:
+Request -
+Requires authentication. <mark>title</mark>, <mark>author</mark>, and <mark>genre</mark> are required fields.
+
+<mark>POST books/</mark>
+
+```json
+    {
+	    "title": "Detransition, Baby",
+		"author": "Torrey Peters",
+		"published_date": "2021-12-23",
+		"genre": "trans fiction",
+    }
+```
+
+Response - 
+
+```json
+	{
+		"title": "Detransition, Baby",
+		"author": "Torrey Peters",
+		"published_date": "2021-12-23",
+		"genre": "trans fiction",
+		"featured": false
+	}
+```
+
+# 4. Book Detail Page:
+Request -
+
+Requires authentication.
+<mark>GET books/detail/3</mark>
+
+Response - 
+
+```json
+{
+	"title": "Redemptor",
+	"author": "Jordan Ifueko",
+	"published_date": "2021-08-17",
+	"genre": "YA fantasy",
+	"featured": true,
+	"notes": [
+		"bought redemptor",
+		"on page 1~"
+	]
+}
+```
+
+# 5. Search books by author/title
+# 6. List of tracked books w/status
+# 7. Mark book with status
+
+# 8. Edit a status:
+Request -
+Requires authentication. 
+***still only functioning with pk input***
+
+<mark>PATCH status/3</mark>
+
+```json
+[
+{
+    "read_status": "RDG",
+}
+]
+```
+
+Response - 
+
+```json
+{
+	"book": 3,
+	"read_status": "RDG",
+	"user": 1
+}
+```
+# 9. Book List by Status
+# 10. Private Note List
+
+# 11. Public Note List:
+Request -
+
+<mark>GET notes/</mark>
+
+Response - 
+
+```json
+[
+	{
+		"entry_name": "on page 1~",
+		"book": "Redemptor",
+		"date": "2022-11-09",
+		"entry": "have started reading the first chapter!"
+	},
+	{
+		"entry_name": "bought redemptor",
+		"book": "Redemptor",
+		"date": "2022-11-08",
+		"entry": "today I bought redemptor at Rofhiwa - can't wait to start reading it!"
+	}
+]
+```
+# 12. Create Note 
+# 13. Edit Note
+# 14. Update a Book
+# 15. Delete a Book
+
+
+
+
+
+
+_______________
+# Status List:
+Request -
+Requires authentication.
+
+<mark>GET status/</mark>
+
+Response - 
+
+```json
+[
+	{
+		"book": null,
+		"read_status": "NA",
+		"user": null
+	},
+	{
+		"book": null,
+		"read_status": "NA",
+		"user": null
+	},
+	{
+		"book": 3,
+		"read_status": "RDG",
+		"user": 1
+	}
+]
+```
+# Status Detail:
+Request -
+Requires authentication.
+
+<mark>GET status/3/</mark>
+
+Response - 
+
+```json
+[
+	{
+	"book": 3,
+	"read_status": "NA",
+	"user": 1
+}
+]
+```
+
