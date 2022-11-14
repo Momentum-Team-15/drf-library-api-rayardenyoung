@@ -36,3 +36,113 @@ Admin users can:
 - delete a book (this should not delete notes about a book)
 
 You'll need to use Insomnia (or some other tool for making requests) to test your API as you are building it.
+
+
+
+# ENDPOINTS 
+
+# Book List:
+Request -
+
+Requires authentication. 
+<mark>GET books/</mark>
+
+Response - 
+
+```json
+[
+	{
+		"title": "The Ways of the Househusband vol. 1",
+		"author": "Kousuke Oono",
+		"published_date": "2019-09-17",
+		"genre": "manga",
+		"featured": false
+	},
+	{
+		"title": "Sulfur vol. 1",
+		"author": "H. Albanese",
+		"published_date": null,
+		"genre": "graphic novel",
+		"featured": false
+	},
+    {
+		"title": "Redemptor",
+		"author": "Jordan Ifueko",
+		"published_date": "2021-08-17",
+		"genre": "YA fantasy",
+		"featured": true
+	}
+
+]
+```
+
+# Featured List:
+Request -
+
+Requires authentication. 
+<mark>GET featured/</mark>
+
+Response - 
+
+```json
+[
+	 {
+		"title": "Redemptor",
+		"author": "Jordan Ifueko",
+		"published_date": "2021-08-17",
+		"genre": "YA fantasy",
+		"featured": true
+	}
+
+]
+```
+
+# Note List:
+Request -
+
+<mark>GET notes/</mark>
+
+Response - 
+
+```json
+[
+	{
+		"entry_name": "on page 1~",
+		"book": "Redemptor",
+		"date": "2022-11-09",
+		"entry": "have started reading the first chapter!"
+	},
+	{
+		"entry_name": "bought redemptor",
+		"book": "Redemptor",
+		"date": "2022-11-08",
+		"entry": "today I bought redemptor at Rofhiwa - can't wait to start reading it!"
+	}
+]
+```
+
+# Add a book:
+Request -
+Requires authentication. <mark>title</mark>, <mark>author</mark>, and <mark>genre</mark> are required fields.
+
+<mark>POST books/</mark>
+
+```json
+    {
+	    "title": "Detransition, Baby",
+		"author": "Torrey Peters",
+		"published_date": "2021-12-23",
+		"genre": "trans fiction",
+    }
+
+Response - 
+
+```json
+	{
+		"title": "Detransition, Baby",
+		"author": "Torrey Peters",
+		"published_date": "2021-12-23",
+		"genre": "trans fiction",
+		"featured": false
+	}
+```

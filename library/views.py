@@ -66,11 +66,11 @@ class NoteView(generics.ListCreateAPIView):
     serializer_class = NoteSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get_queryset(self):
-        return self.request.user.notes.all()
+    # def get_queryset(self):
+    #     return self.request.user.notes.all()
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(user=self.request.user)
 
 class StatusView(generics.ListCreateAPIView):
     queryset = Status.objects.all()

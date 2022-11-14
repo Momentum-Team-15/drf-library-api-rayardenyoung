@@ -30,4 +30,5 @@ urlpatterns = [
     path('notes/add/', views.NoteView.as_view(), name='note-add'),
     path('books/add/', views.BookViewSet.as_view({'post': 'create'}), name='book-add'),
     path('books/detail/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
+    path('status/', views.StatusView.as_view(), name='status-list'),
 ]
