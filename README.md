@@ -167,3 +167,22 @@ Response -
 		"featured": false
 	}
 ```
+# figure out error >>
+# Status List:
+Request -
+
+<mark>GET status/</mark>
+
+Response - 
+
+```json
+[
+[
+	{
+		"book": "null",
+		"read_status": "n/a",
+		"user": null
+	}
+]
+]
+```

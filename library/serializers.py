@@ -37,4 +37,4 @@ class NoteSerializer(serializers.ModelSerializer):
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ['read_status', 'book', 'user']
+        fields = ['book', 'read_status', 'user']
