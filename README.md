@@ -155,6 +155,7 @@ Requires authentication. <mark>title</mark>, <mark>author</mark>, and <mark>genr
 		"published_date": "2021-12-23",
 		"genre": "trans fiction",
     }
+```
 
 Response - 
 

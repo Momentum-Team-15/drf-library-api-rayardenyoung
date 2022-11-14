@@ -83,3 +83,7 @@ class StatusView(generics.ListCreateAPIView):
     #     queryset = Status.objects.filter(user=self.request.user)
     #     return queryset
 
+class StatusDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    # permission_classes = [permissions.IsAuthenticated]

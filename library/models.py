@@ -22,10 +22,10 @@ class Book(models.Model):
         ]
 
 class Status(models.Model):
-    UNTRACKED = 'n/a'
-    WANTTOREAD = 'want-to-read'
-    READING = 'reading'
-    READ = 'read'
+    UNTRACKED = 'NA'
+    WANTTOREAD = 'WTR'
+    READING = 'RDG'
+    READ = 'RD'
     STATUS_CHOICES = [
         (UNTRACKED, 'n/a'),
         (WANTTOREAD, 'want-to-read'),
