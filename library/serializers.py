@@ -2,20 +2,15 @@ from rest_framework import serializers
 from .models import Book, Note, Status
 
 class BookSerializer(serializers.ModelSerializer):
-    class Meta:
+    #accessing foreign keys.
+    statuses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+    #using stringrelatedfield so notes will show up as string instead of pk
+    notes = serializers.StringRelatedField(many=True, read_only=True)
+
+    class Meta:    
         model = Book
         #these fields are the bits of data that will populate in insomnia
         fields = ['title', 'author', 'published_date', 'genre', 'featured', 'statuses', 'notes']
-
-# class BookDetailSerializer(serializers.ModelSerializer):
-#     #accessing foreign keys.
-#     statuses = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
-#     #using stringrelatedfield so notes will show up as string instead of pk
-#     notes = serializers.StringRelatedField(many=True, read_only=True)
-
-#     class Meta:
-#         model = Book
-#         fields = ['title', 'author', 'published_date', 'genre', 'featured', ]
 
 class FeaturedSerializer(serializers.ModelSerializer):
     class Meta:
@@ -37,4 +32,4 @@ class NoteSerializer(serializers.ModelSerializer):
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:
         model = Status
-        fields = ['book', 'read_status', 'user']
+        fields = ['book', 'read_status']

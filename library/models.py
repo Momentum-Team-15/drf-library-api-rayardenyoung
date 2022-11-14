@@ -34,7 +34,6 @@ class Status(models.Model):
     ]
     read_status = models.CharField(max_length=50, choices=STATUS_CHOICES, default=UNTRACKED)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="statuses", null=True, blank=True)
     
     class Meta:
         verbose_name_plural = "statuses"
@@ -47,7 +46,6 @@ class Note(models.Model):
     entry = models.TextField(max_length=500, null=True, blank=True)
     date = models.DateField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="notes", null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True, blank=True)
 
 
     def __str__(self):
