@@ -3,7 +3,7 @@ from rest_framework import generics, permissions
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from .models import Book, Note, Status
-from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, BookDetailSerializer, StatusSerializer
+from .serializers import BookSerializer, FeaturedSerializer, NoteSerializer, StatusSerializer
 
 
 # Create your views here.
@@ -43,7 +43,7 @@ class BookViewSet(ModelViewSet):
 #using this view because it's for retrieving, updating or deleting a ~single instance~ of a model
 class BookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
-    serializer_class = BookDetailSerializer
+    serializer_class = BookSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 #ohhh okay, so this ListCreateAPITView is explicitly for listing a queryset or creating a model instance.

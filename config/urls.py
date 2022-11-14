@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from library import views
 from library.models import Book, Note
-from library.serializers import BookSerializer, FeaturedSerializer, NoteSerializer
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,7 +28,8 @@ urlpatterns = [
     path('notes/', views.NoteView.as_view(), name='note-list'),
     path('notes/add/', views.NoteView.as_view(), name='note-add'),
     path('books/add/', views.BookViewSet.as_view({'post': 'create'}), name='book-add'),
-    path('books/detail/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
+    path('books/detail/<int:pk>/', views.BookView.as_view(), name='book-detail'),
+    #
     path('status/', views.StatusView.as_view(), name='status-list'),
     path('status/<int:pk>/', views.StatusDetailView.as_view(), name='status-detail'),
 ]

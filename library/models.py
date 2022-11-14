@@ -47,6 +47,7 @@ class Note(models.Model):
     entry = models.TextField(max_length=500, null=True, blank=True)
     date = models.DateField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="notes", null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes", null=True, blank=True)
 
 
     def __str__(self):
